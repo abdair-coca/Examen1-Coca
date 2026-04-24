@@ -29,4 +29,11 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    //Relacion: Muchos usuarios pertenecen a muchas notas (muchos a muchos)
+    public function notes()
+    {
+        return $this->belongsToMany(Note::class)
+            ->withPivot('role')
+            ->withTimestamps();
+    }
 }
