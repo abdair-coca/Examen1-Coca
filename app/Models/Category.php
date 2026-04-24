@@ -10,27 +10,13 @@ class Category extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'content',
-        'is_public',
-        'category_id',
+        'name',
+        'description',
     ];
 
-    protected $casts = [
-        'is_public' => 'boolean',
-    ];
-
-    // Relación: una nota pertenece a una categoría
-    public function category()
+    // Relación: una categoría tiene muchas notas
+    public function notes()
     {
-        return $this->belongsTo(Category::class);
-    }
-
-    // Relación: muchos a muchos con usuarios (con pivote)
-    public function users()
-    {
-        return $this->belongsToMany(User::class)
-            ->withPivot('role')
-            ->withTimestamps();
+        return $this->hasMany(Note::class);
     }
 }

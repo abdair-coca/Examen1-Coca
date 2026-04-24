@@ -21,7 +21,7 @@ class NoteSeeder extends Seeder
         Note::factory(15)->create()->each(function ($note) use ($users) {
 
             // 1. Asignar owner (primer usuario)
-            $owner = $users->first();
+            $owner = User::where('email', 'admin@uatf.bo')->first();
             $note->users()->attach($owner->id, ['role' => 'owner']);
 
             // 2. Compartir con 1 o 2 usuarios aleatorios
